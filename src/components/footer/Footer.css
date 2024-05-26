@@ -170,22 +170,13 @@ footer {
   transition: all 0.2s linear;
   font-size: var(--fontsize-small);
 }
-/* .socialhover:first-child {
-  padding-left: 0.5rem;
-} */
+
 .socialhover svg {
   width: 2rem;
   height: 2rem;
   fill: #fff;
 }
-/* .socialhover svg.linkedinsvg {
-  width: 1.7rem;
-  fill: #fff;
-}
-.socialhover svg.fbsvg {
-  width: 1.3rem;
-  fill: #fff;
-} */
+
 .socialhover svg {
   transition: all 0.2s linear;
 }

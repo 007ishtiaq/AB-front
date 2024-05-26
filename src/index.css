@@ -63,6 +63,12 @@ body {
   color: black !important;
   /* line-height: unset !important; */
 }
+
+a:active,
+a:hover {
+  text-decoration: none;
+  outline: 0;
+}
 /* -----common classes----- */
 
 .fullcont {
