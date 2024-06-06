@@ -41,7 +41,7 @@ export default function FlashHome() {
 
   return (
     <div className="centercont">
-      <MegaBanner loading={loading} banner={banners[0]} />
+      <MegaBanner loading={loading} banner={banners[1]} />
       <Online onChange={loadFlashproducts} />
       <ProductsCardAll
         products={products}

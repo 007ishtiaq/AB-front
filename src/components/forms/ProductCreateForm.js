@@ -12,11 +12,10 @@ const ProductCreateForm = ({
   handleSubChange,
   subOptions,
   sub2Options,
-  showSub,
-  showSub2,
-  handleSaleChange,
+  handleSub2Change,
+  attributes,
+  addAttribute,
 }) => {
-  // destructure
   const {
     art,
     title,
@@ -25,8 +24,6 @@ const ProductCreateForm = ({
     disprice,
     categories,
     category,
-    subs,
-    subs2,
     shipping,
     quantity,
     weight,
@@ -169,46 +166,60 @@ const ProductCreateForm = ({
         </select>
       </div>
 
-      {showSub && (
-        <div>
-          <label>Sub Level 1</label>
-          <select
-            name="sub"
-            className="form-control"
-            onChange={handleSubChange}
-            placeholder="Please select"
-            value={subs}
-          >
-            <option>Please select</option>
-            {subOptions.length > 0 &&
-              subOptions.map((s) => (
-                <option key={s._id} value={s._id}>
-                  {s.name}
-                </option>
-              ))}
-          </select>
-        </div>
+      {category &&
+        attributes.map((attr, index) => (
+          <div key={index}>
+            <div className="form-group">
+              <label>Sub Level 1</label>
+              <select
+                name="sub"
+                className="form-control"
+                onChange={(e) => handleSubChange(index, e)}
+                value={attr.subs}
+              >
+                <option>Please select</option>
+                {subOptions.length > 0 &&
+                  subOptions.map((s) => (
+                    <option key={s._id} value={s._id}>
+                      {s.name}
+                    </option>
+                  ))}
+              </select>
+            </div>
+
+            {attr.subs && (
+              <div className="form-group">
+                <label>Sub Level 2</label>
+                <Select
+                  mode="multiple"
+                  style={{ width: "100%" }}
+                  placeholder="Please select"
+                  value={attr.subs2}
+                  onChange={(value) => handleSub2Change(index, value)}
+                >
+                  {sub2Options.length > 0 &&
+                    sub2Options.map((s2) => (
+                      <Option key={s2._id} value={s2._id}>
+                        {s2.name}
+                      </Option>
+                    ))}
+                </Select>
+              </div>
+            )}
+          </div>
+        ))}
+
+      {category && (
+        <button
+          type="button"
+          className="btn btn-outline-secondary"
+          onClick={addAttribute}
+        >
+          Add Attribute
+        </button>
       )}
 
-      {showSub2 && (
-        <div>
-          <label>Sub Level 2</label>
-          <Select
-            mode="multiple"
-            style={{ width: "100%" }}
-            placeholder="Please select"
-            value={subs2}
-            onChange={(value) => setValues({ ...values, subs2: value })}
-          >
-            {sub2Options.length &&
-              sub2Options.map((s2) => (
-                <Option key={s2._id} value={s2._id}>
-                  {s2.name}
-                </Option>
-              ))}
-          </Select>
-        </div>
-      )}
+      {JSON.stringify(attributes)}
 
       <div className="form-group">
         <label>On Sale ?</label>
@@ -219,7 +230,7 @@ const ProductCreateForm = ({
         </select>
       </div>
 
-      {onSale === "Yes" && (
+      {values.onSale === "Yes" && (
         <div className="form-group">
           <label>Sale Time & Date</label>
           <input
@@ -234,7 +245,7 @@ const ProductCreateForm = ({
 
       <br />
       <button
-        disabled={(onSale === "Yes" && !saleTime) || !images.length}
+        disabled={(values.onSale === "Yes" && !saleTime) || !images.length}
         className="btn btn-outline-info"
       >
         Save

@@ -1,0 +1,61 @@
+/* ------other styling and css from commons & MegaBanner----- */
+
+.catebannersvg {
+  width: 2.2rem;
+  height: auto;
+  display: block;
+}
+
+.catebannercont {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+.cbannercont,
+.ccatecont {
+  width: 50%;
+}
+.cbannercont {
+  display: flex;
+  justify-content: center;
+}
+.cbannercont img {
+  width: 70%;
+}
+.ccatecont {
+  padding: 3rem 5rem;
+}
+.catenameabove {
+  margin-bottom: 2rem;
+}
+.catenameabove p {
+  font-size: 4rem;
+}
+.catenameabove span {
+  font-size: 1.4rem;
+}
+
+.catenamerow {
+  display: flex;
+}
+.catenamerow div {
+  margin: 0.3rem;
+}
+.catenamecont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid gray;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  transition: all 0.2s linear;
+}
+.catenamecont:hover {
+  background-color: var(--org-primary);
+  color: white;
+  border: 1px solid white;
+}
