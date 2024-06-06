@@ -53,6 +53,7 @@
   border-radius: 0.4rem;
   cursor: pointer;
   transition: all 0.2s linear;
+  color: black;
 }
 .catenamecont:hover {
   background-color: var(--org-primary);

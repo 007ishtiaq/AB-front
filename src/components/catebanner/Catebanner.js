@@ -1,5 +1,6 @@
 import React from "react";
 import { ReactComponent as Samplesvg } from "../../images/nav category svg/grocery.svg";
+import { Link } from "react-router-dom";
 import "./Catebanner.css";
 import sampleImg from "../../images/catebanner/sample600x479.webp";
 
@@ -23,32 +24,44 @@ export default function Catebanner() {
                 </div>
                 <div className="catenamebelow">
                   <div className="catenamerow">
-                    <div className="catenamecont">
-                      <Samplesvg className="catebannersvg" />
-                      <p>Dishwashers</p>
-                    </div>
-                    <div className="catenamecont">
-                      <p>svg</p>
-                      <p>Electric Kettle</p>
-                    </div>
-                    <div className="catenamecont">
-                      <p>svg</p>
-                      <p>Air Fryers</p>
-                    </div>
+                    <Link to={`/shop?Dishwashers`}>
+                      <div className="catenamecont">
+                        <Samplesvg className="catebannersvg" />
+                        <p>Dishwashers</p>
+                      </div>
+                    </Link>
+                    <Link to={`/shop?Kettle`}>
+                      <div className="catenamecont">
+                        <Samplesvg className="catebannersvg" />
+                        <p>Electric Kettle</p>
+                      </div>
+                    </Link>
+                    <Link to={`/shop?Fryers`}>
+                      <div className="catenamecont">
+                        <Samplesvg className="catebannersvg" />
+                        <p>Air Fryers</p>
+                      </div>
+                    </Link>
                   </div>
                   <div className="catenamerow">
-                    <div className="catenamecont">
-                      <p>svg</p>
-                      <p>Microwave Oven</p>
-                    </div>
-                    <div className="catenamecont">
-                      <p>svg</p>
-                      <p>Cooking Range</p>
-                    </div>
-                    <div className="catenamecont">
-                      <p>svg</p>
-                      <p>Hand Blander</p>
-                    </div>
+                    <Link to={`/shop?Oven`}>
+                      <div className="catenamecont">
+                        <Samplesvg className="catebannersvg" />
+                        <p>Microwave Oven</p>
+                      </div>
+                    </Link>
+                    <Link to={`/shop?Cooking`}>
+                      <div className="catenamecont">
+                        <Samplesvg className="catebannersvg" />
+                        <p>Cooking Range</p>
+                      </div>
+                    </Link>
+                    <Link to={`/shop?Blander`}>
+                      <div className="catenamecont">
+                        <Samplesvg className="catebannersvg" />
+                        <p>Hand Blander</p>
+                      </div>
+                    </Link>
                   </div>
                 </div>
               </div>
