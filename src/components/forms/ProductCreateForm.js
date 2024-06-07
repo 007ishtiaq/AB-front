@@ -219,8 +219,6 @@ const ProductCreateForm = ({
         </button>
       )}
 
-      {JSON.stringify(attributes)}
-
       <div className="form-group">
         <label>On Sale ?</label>
         <select name="onSale" className="form-control" onChange={handleChange}>

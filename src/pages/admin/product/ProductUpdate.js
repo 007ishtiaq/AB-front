@@ -19,8 +19,6 @@ const initialState = {
   price: "",
   disprice: "",
   category: "",
-  subs: "",
-  subs2: [],
   shipping: "",
   quantity: "",
   weight: "",

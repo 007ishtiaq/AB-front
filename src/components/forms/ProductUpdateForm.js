@@ -27,8 +27,6 @@ const ProductUpdateForm = ({
     price,
     disprice,
     category,
-    subs,
-    subs2,
     shipping,
     quantity,
     weight,
@@ -176,43 +174,6 @@ const ProductUpdateForm = ({
               </option>
             ))}
         </select>
-      </div>
-
-      <div>
-        <label>Sub Level 1</label>
-        <select
-          name="subs"
-          className="form-control"
-          onChange={handleSubChange}
-          placeholder="Please select"
-          value={subs._id}
-        >
-          <option>Please select</option>
-          {subOptions.length > 0 &&
-            subOptions.map((s) => (
-              <option key={s._id} value={s._id}>
-                {s.name}
-              </option>
-            ))}
-        </select>
-      </div>
-
-      <div>
-        <label>Sub Level 2</label>
-        <Select
-          mode="multiple"
-          style={{ width: "100%" }}
-          placeholder="Please select"
-          value={arrayOfSubs2}
-          onChange={(value) => setArrayOfSubs2(value)}
-        >
-          {sub2Options.length &&
-            sub2Options.map((s2) => (
-              <Option key={s2._id} value={s2._id}>
-                {s2.name}
-              </Option>
-            ))}
-        </Select>
       </div>
 
       <div className="form-group">

@@ -18,8 +18,6 @@ const initialState = {
   disprice: "",
   categories: [],
   category: "",
-  subs: "",
-  subs2: [],
   shipping: "Yes",
   quantity: "50",
   weight: "500",
