@@ -3,6 +3,7 @@
 .catebannersvg {
   width: 2.2rem;
   height: auto;
+  transition: all 0.2s linear;
   display: block;
 }
 
@@ -59,4 +60,7 @@
   background-color: var(--org-primary);
   color: white;
   border: 1px solid white;
+}
+.catenamecont:hover .catebannersvg {
+  fill: white;
 }

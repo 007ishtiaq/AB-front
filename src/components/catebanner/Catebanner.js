@@ -1,8 +1,13 @@
 import React from "react";
-import { ReactComponent as Samplesvg } from "../../images/nav category svg/grocery.svg";
 import { Link } from "react-router-dom";
 import "./Catebanner.css";
 import sampleImg from "../../images/catebanner/sample600x479.webp";
+import { ReactComponent as Dishwashersvg } from "../../images/homepage/catebanner/dishwasher.svg";
+import { ReactComponent as Kettlesvg } from "../../images/homepage/catebanner/kettle.svg";
+import { ReactComponent as Fryersvg } from "../../images/homepage/catebanner/fryer.svg";
+import { ReactComponent as Ovensvg } from "../../images/homepage/catebanner/oven.svg";
+import { ReactComponent as Cookingrangesvg } from "../../images/homepage/catebanner/cookingrange.svg";
+import { ReactComponent as Blandersvg } from "../../images/homepage/catebanner/blander.svg";
 
 export default function Catebanner() {
   return (
@@ -26,19 +31,19 @@ export default function Catebanner() {
                   <div className="catenamerow">
                     <Link to={`/shop?Dishwashers`}>
                       <div className="catenamecont">
-                        <Samplesvg className="catebannersvg" />
+                        <Dishwashersvg className="catebannersvg" />
                         <p>Dishwashers</p>
                       </div>
                     </Link>
                     <Link to={`/shop?Kettle`}>
                       <div className="catenamecont">
-                        <Samplesvg className="catebannersvg" />
+                        <Kettlesvg className="catebannersvg" />
                         <p>Electric Kettle</p>
                       </div>
                     </Link>
                     <Link to={`/shop?Fryers`}>
                       <div className="catenamecont">
-                        <Samplesvg className="catebannersvg" />
+                        <Fryersvg className="catebannersvg" />
                         <p>Air Fryers</p>
                       </div>
                     </Link>
@@ -46,19 +51,19 @@ export default function Catebanner() {
                   <div className="catenamerow">
                     <Link to={`/shop?Oven`}>
                       <div className="catenamecont">
-                        <Samplesvg className="catebannersvg" />
+                        <Ovensvg className="catebannersvg" />
                         <p>Microwave Oven</p>
                       </div>
                     </Link>
                     <Link to={`/shop?Cooking`}>
                       <div className="catenamecont">
-                        <Samplesvg className="catebannersvg" />
+                        <Cookingrangesvg className="catebannersvg" />
                         <p>Cooking Range</p>
                       </div>
                     </Link>
                     <Link to={`/shop?Blander`}>
                       <div className="catenamecont">
-                        <Samplesvg className="catebannersvg" />
+                        <Blandersvg className="catebannersvg" />
                         <p>Hand Blander</p>
                       </div>
                     </Link>
