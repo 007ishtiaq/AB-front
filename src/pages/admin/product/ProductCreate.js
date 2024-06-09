@@ -68,7 +68,6 @@ const ProductCreate = () => {
     const payload = { ...values, attributes };
     createProduct(payload, user.token)
       .then((res) => {
-        console.log(res);
         window.alert(`"${res.data.title}" is created`);
         window.location.reload();
       })
@@ -86,7 +85,8 @@ const ProductCreate = () => {
 
   const handleCatagoryChange = (e) => {
     e.preventDefault();
-    setValues({ ...values, subs: "", subs2: [], category: e.target.value });
+    setValues({ ...values, category: e.target.value });
+    setAttributes([{ subs: "", subs2: [] }]);
     getCategorySubs(e.target.value).then((res) => {
       setSubOptions(res.data);
     });
