@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Menu, Slider, Checkbox, Radio } from "antd";
+import { getCategorySubs } from "../../functions/category";
+import { getSubsSub2 } from "../../functions/sub";
 import {
   getProductsByCount,
   fetchProductsByFilter,
   getHighestPrice,
 } from "../../functions/product";
+import "../../pages/shop/searchstyle.css";
 import { getCategories } from "../../functions/category";
 import { getSubs } from "../../functions/sub";
 import { getBrands } from "../../functions/brands";
@@ -20,7 +23,7 @@ const { SubMenu, ItemGroup } = Menu;
 export default function SearchFilter({ products, setProducts }) {
   const [price, setPrice] = useState([0, 0]); // price range search
   const [categories, setCategories] = useState([]); // to show the available list of categories
-  const [categoryIds, setCategoryIds] = useState([]); // selected categories to search
+  const [category, setCategory] = useState(""); // selected categories to search
   const [star, setStar] = useState("");
   const [subs, setSubs] = useState([]);
   const [sub, setSub] = useState("");
@@ -40,7 +43,7 @@ export default function SearchFilter({ products, setProducts }) {
     // fetch categories
     getCategories().then((res) => setCategories(res.data));
     // fetch subcategories
-    getSubs().then((res) => setSubs(res.data));
+    // getSubs().then((res) => setSubs(res.data));
     // fetch brands (as set state is saprate for each value so no need to use async)
     getBrands().then((b) => {
       setBrands(b.data.map((item) => item.name));
@@ -87,7 +90,7 @@ export default function SearchFilter({ products, setProducts }) {
 
       if (
         !text &&
-        categoryIds.length < 1 &&
+        !category &&
         !brand &&
         price[0] === 0 &&
         price[1] === 0 &&
@@ -101,7 +104,7 @@ export default function SearchFilter({ products, setProducts }) {
 
       if (text) {
         // reset
-        setCategoryIds([]);
+        setCategory("");
         setPrice([0, 0]);
         setStar("");
         setSub("");
@@ -127,7 +130,7 @@ export default function SearchFilter({ products, setProducts }) {
     });
 
     // reset
-    setCategoryIds([]);
+    setCategory("");
     setPrice(value);
     setStar("");
     setSub("");
@@ -144,22 +147,21 @@ export default function SearchFilter({ products, setProducts }) {
   const showCategories = () =>
     categories.map((c) => (
       <div key={c._id}>
-        <Checkbox
-          onChange={handleCheck}
-          className="pb-2 pl-4 pr-4 pt-2"
+        <Radio
           value={c._id}
           name="category"
-          checked={categoryIds.includes(c._id)}
+          checked={c._id === category}
+          onChange={handleCheck}
+          className="pb-1 pl-4 pr-4"
         >
           {c.name}
-        </Checkbox>
+        </Radio>
         <br />
       </div>
     ));
 
   // handle check for categories
-  const handleCheck = (e) => {
-    // reset
+  const handleCheck = async (e) => {
     dispatch({
       type: "SEARCH_QUERY",
       payload: { text: "" },
@@ -170,25 +172,22 @@ export default function SearchFilter({ products, setProducts }) {
     setBrand("");
     setColor("");
     setShipping("");
-    // console.log(e.target.value);
-    let inTheState = [...categoryIds];
-    let justChecked = e.target.value;
-    let foundInTheState = inTheState.indexOf(justChecked); // index or -1
 
-    // indexOf method ?? if not found returns -1 else return index [1,2,3,4,5]
-    if (foundInTheState === -1) {
-      inTheState.push(justChecked);
-    } else {
-      // if found pull out one item from index
-      inTheState.splice(foundInTheState, 1);
-    }
+    setCategory(e.target.value);
+    fetchProducts({ category: e.target.value });
 
-    setCategoryIds(inTheState);
-    // console.log(inTheState);
-    fetchProducts({ category: inTheState });
-
-    if (inTheState.length < 1) {
-      loadAllProducts();
+    try {
+      const subRes = await getCategorySubs(e.target.value);
+      const subsWithSub2 = await Promise.all(
+        subRes.data.map(async (sub) => {
+          const sub2Res = await getSubsSub2(sub._id);
+          return { ...sub, sub2: sub2Res.data };
+        })
+      );
+      setSubs(subsWithSub2);
+      console.log("subsWithSub2", subsWithSub2);
+    } catch (error) {
+      console.error("Error fetching subcategories:", error);
     }
   };
 
@@ -214,7 +213,7 @@ export default function SearchFilter({ products, setProducts }) {
       payload: { text: "" },
     });
     setPrice([0, 0]);
-    setCategoryIds([]);
+    setCategory("");
     setStar("");
     setColor("");
     setBrand(e.target.value);
@@ -302,7 +301,7 @@ export default function SearchFilter({ products, setProducts }) {
       payload: { text: "" },
     });
     setPrice([0, 0]);
-    setCategoryIds([]);
+    setCategory("");
     setStar(num);
     setSub("");
     setBrand("");
@@ -312,15 +311,30 @@ export default function SearchFilter({ products, setProducts }) {
   };
 
   // 6. show products by sub category
-  const showSubs = () =>
+  const showSubs = (subs) =>
     subs.map((s) => (
-      <div
-        key={s._id}
-        onClick={() => handleSub(s)}
-        className="p-1 m-1 badge badge-secondary"
-        style={{ cursor: "pointer" }}
-      >
-        {s.name}
+      <div key={s._id} style={{ marginBottom: "10px" }}>
+        <div
+          onClick={() => handleSub(s)}
+          className="p-1 m-1 badge badge-secondary"
+          style={{ cursor: "pointer" }}
+        >
+          {s.name}
+        </div>
+        {s.sub2 && s.sub2.length > 0 && (
+          <div style={{ paddingLeft: "20px" }}>
+            {s.sub2.map((sub2Item) => (
+              <div
+                key={sub2Item._id}
+                onClick={() => handleSub(sub2Item)}
+                className="p-1 m-1 badge badge-secondary"
+                style={{ cursor: "pointer" }}
+              >
+                {sub2Item.name}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     ));
 
@@ -332,7 +346,7 @@ export default function SearchFilter({ products, setProducts }) {
       payload: { text: "" },
     });
     setPrice([0, 0]);
-    setCategoryIds([]);
+    setCategory("");
     setStar("");
     setBrand("");
     setColor("");
@@ -362,7 +376,7 @@ export default function SearchFilter({ products, setProducts }) {
       payload: { text: "" },
     });
     setPrice([0, 0]);
-    setCategoryIds([]);
+    setCategory("");
     setStar("");
     setBrand("");
     setColor(e.target.value);
@@ -402,7 +416,7 @@ export default function SearchFilter({ products, setProducts }) {
     });
 
     // reset
-    setCategoryIds([]);
+    setCategory("");
     setPrice([0, 0]);
     setStar("");
     setSub("");
@@ -421,7 +435,7 @@ export default function SearchFilter({ products, setProducts }) {
       payload: { text: "" },
     });
     setPrice([0, 0]);
-    setCategoryIds([]);
+    setCategory("");
     setStar("");
     setBrand("");
     setColor("");
@@ -448,6 +462,17 @@ export default function SearchFilter({ products, setProducts }) {
         >
           <div style={{ maringTop: "-10px" }}>{showCategories()}</div>
         </SubMenu>
+        {!subs === null && (
+          <SubMenu
+            class="filtercont"
+            key="15"
+            title={<div class="filterheading">TAGS</div>}
+          >
+            <div style={{ marginTop: "-10px" }} className="pl-4 pr-4">
+              {showSubs(subs)}
+            </div>
+          </SubMenu>
+        )}
         <SubMenu
           class="filtercont"
           key="12"
@@ -477,15 +502,6 @@ export default function SearchFilter({ products, setProducts }) {
           title={<div class="filterheading">PRODUCT RATING</div>}
         >
           <div style={{ maringTop: "-10px" }}>{showStars()}</div>
-        </SubMenu>
-        <SubMenu
-          class="filtercont"
-          key="15"
-          title={<div class="filterheading">TAGS</div>}
-        >
-          <div style={{ maringTop: "-10px" }} className="pl-4 pr-4">
-            {showSubs()}
-          </div>
         </SubMenu>
         <SubMenu
           class="filtercont"
