@@ -33,6 +33,7 @@ export default function SearchFilter({ products, setProducts }) {
   const [color, setColor] = useState("");
   const [shipping, setShipping] = useState("");
   const [highestPrice, setHighestPrice] = useState(0); // Highest Price for price filter
+  const [selectedSub2, setSelectedSub2] = useState(null);
 
   let dispatch = useDispatch();
   let { search } = useSelector((state) => ({ ...state }));
@@ -185,7 +186,6 @@ export default function SearchFilter({ products, setProducts }) {
         })
       );
       setSubs(subsWithSub2);
-      console.log("subsWithSub2", subsWithSub2);
     } catch (error) {
       console.error("Error fetching subcategories:", error);
     }
@@ -311,47 +311,43 @@ export default function SearchFilter({ products, setProducts }) {
   };
 
   // 6. show products by sub category
-  const showSubs = (subs) =>
-    subs.map((s) => (
-      <div key={s._id} style={{ marginBottom: "10px" }}>
-        <div
-          onClick={() => handleSub(s)}
-          className="p-1 m-1 badge badge-secondary"
-          style={{ cursor: "pointer" }}
-        >
-          {s.name}
-        </div>
-        {s.sub2 && s.sub2.length > 0 && (
-          <div style={{ paddingLeft: "20px" }}>
-            {s.sub2.map((sub2Item) => (
-              <div
-                key={sub2Item._id}
-                onClick={() => handleSub(sub2Item)}
-                className="p-1 m-1 badge badge-secondary"
-                style={{ cursor: "pointer" }}
-              >
-                {sub2Item.name}
-              </div>
-            ))}
-          </div>
-        )}
+  const showSubs = (sub2, selectedSub2, handleSub) =>
+    sub2.map((sub2Item) => (
+      // <div
+      //   key={sub2Item._id}
+      //   onClick={() => handleSub(sub2Item._id)}
+      //   className="p-1 m-1 badge badge-secondary"
+      //   style={{ cursor: "pointer" }}
+      // >
+      //   {sub2Item.name}
+      // </div>
+      <div
+        key={sub2Item._id}
+        onClick={() => handleSub(sub2Item)}
+        className={`p-1 m-1 badge ${
+          selectedSub2 === sub2Item._id ? "badge-primary" : "badge-secondary"
+        }`}
+        style={{ cursor: "pointer" }}
+      >
+        {sub2Item.name}
       </div>
     ));
 
-  const handleSub = (sub) => {
-    // console.log("SUB", sub);
-    setSub(sub);
+  const handleSub = (sub2Item) => {
+    // console.log("sub2Item", sub2Item);
+    setSelectedSub2(sub2Item._id);
+    setSub(sub2Item);
     dispatch({
       type: "SEARCH_QUERY",
       payload: { text: "" },
     });
     setPrice([0, 0]);
-    setCategory("");
+    // setCategory("");
     setStar("");
     setBrand("");
     setColor("");
     setShipping("");
-    fetchProducts({ sub });
+    fetchProducts({ sub: sub2Item });
   };
 
   // 8. show products based on color
@@ -416,6 +412,7 @@ export default function SearchFilter({ products, setProducts }) {
     });
 
     // reset
+    setSelectedSub2(null);
     setCategory("");
     setPrice([0, 0]);
     setStar("");
@@ -452,7 +449,22 @@ export default function SearchFilter({ products, setProducts }) {
         <p>Clear All Filters</p>
       </div>
       <Menu
-        defaultOpenKeys={["11", "12", "13", "14", "15", "16", "17"]}
+        defaultOpenKeys={[
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "24",
+          "25",
+          "26",
+          "27",
+          "28",
+          "29",
+          "30",
+        ]}
         mode="inline"
       >
         <SubMenu
@@ -460,19 +472,29 @@ export default function SearchFilter({ products, setProducts }) {
           key="11"
           title={<div class="filterheading">CATEGORY</div>}
         >
-          <div style={{ maringTop: "-10px" }}>{showCategories()}</div>
+          <div style={{ maringTop: "10px" }}>{showCategories()}</div>
         </SubMenu>
-        {!subs === null && (
+        {subs.map((s, index) => (
           <SubMenu
             class="filtercont"
-            key="15"
-            title={<div class="filterheading">TAGS</div>}
+            key={index + 25}
+            title={<div class="filterheading">{s.name}</div>}
           >
             <div style={{ marginTop: "-10px" }} className="pl-4 pr-4">
-              {showSubs(subs)}
+              {showSubs(s.sub2, selectedSub2, handleSub)}
             </div>
           </SubMenu>
-        )}
+        ))}
+
+        {/* <SubMenu
+          class="filtercont"
+          key="15"
+          title={<div class="filterheading">{!subs === null && "TAGS"}</div>}
+        >
+          <div style={{ marginTop: "-10px" }} className="pl-4 pr-4">
+            {showSubs(subs)}
+          </div>
+        </SubMenu> */}
         <SubMenu
           class="filtercont"
           key="12"
