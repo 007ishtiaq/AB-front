@@ -162,7 +162,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: start;
-  gap: 1rem;
+  /* gap: 5rem; */
   padding-left: 2rem;
   padding-right: 2rem;
   user-select: none;
@@ -172,6 +172,7 @@ footer {
 }
 
 .socialhover svg {
+  margin-right: 0.5rem;
   width: 2rem;
   height: 2rem;
   fill: #fff;

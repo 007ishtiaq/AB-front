@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 import { createOrUpdateUser } from "../../functions/auth";
 import Spinner from "../../components/Spinner/Spinner";
 import Smallspinner from "../../components/Spinner/Smallspinner";
+import { ReactComponent as Logotextblack } from "../../images/headersvgs/logotextblack.svg";
 import { ReactComponent as Logosvg } from "../../images/headersvgs/pearllogo.svg";
-import { ReactComponent as Pearlytouchtxt } from "../../images/headersvgs/pearlytouch.svg";
 import { ReactComponent as Googlesvg } from "../../images/login/google.svg";
 import { ReactComponent as Facebooksvg } from "../../images/login/facebook.svg";
 import "./Login.css";
@@ -401,11 +401,8 @@ const Login = ({ history }) => {
                 our customer service team.
               </div>
               <div class="loginfooterlogocont">
-                <div class="loginfooterlogosvg">
-                  <Logosvg />
-                </div>
                 <div class="loginfooterlogotxt">
-                  <Pearlytouchtxt />
+                  <Logotextblack />
                 </div>
               </div>
             </div>

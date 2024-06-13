@@ -6,7 +6,7 @@ import "./Login.css";
 import Spinner from "../../components/Spinner/Spinner";
 import Smallspinner from "../../components/Spinner/Smallspinner";
 import { ReactComponent as Logosvg } from "../../images/headersvgs/pearllogo.svg";
-import { ReactComponent as Pearlytouchtxt } from "../../images/headersvgs/pearlytouch.svg";
+import { ReactComponent as Logotextblack } from "../../images/headersvgs/logotextblack.svg";
 import { useFormik } from "formik";
 import { registerSchema } from "../../schemas";
 import NoNetModal from "../../components/NoNetModal/NoNetModal";
@@ -143,11 +143,8 @@ const ForgotPassword = ({ history }) => {
             customer service team.
           </div>
           <div class="loginfooterlogocont">
-            <div class="loginfooterlogosvg">
-              <Logosvg />
-            </div>
             <div class="loginfooterlogotxt">
-              <Pearlytouchtxt />
+              <Logotextblack />
             </div>
           </div>
         </div>

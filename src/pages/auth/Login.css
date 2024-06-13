@@ -8,7 +8,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 700px;
+  min-height: 680px;
   font-family: "Poppins", sans-serif;
   border: 1px solid red;
   box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
@@ -82,7 +82,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  /* gap: 10px; */
   width: 78%;
 }
 .submitbtn {
@@ -163,6 +163,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 1rem;
 }
 .fbbtn:hover {
   background-color: #4b6ec7;
@@ -218,8 +219,8 @@
   height: 100%;
 }
 .loginfooterlogotxt {
-  width: 130px;
-  height: 25px;
+  width: 12rem;
+  height: auto;
 }
 .loginfooterlogotxt svg {
   width: 100%;
@@ -252,6 +253,7 @@
   width: 100%;
 }
 .socialheading {
+  font-size: 1.5rem;
   margin: 3rem 0rem 1rem;
   text-align: center;
   width: 100%;
@@ -287,6 +289,9 @@
     display: none;
   }
   .navigatelink {
+    font-size: 1.5rem;
+  }
+  .socialheading {
     font-size: 1.5rem;
   }
 }

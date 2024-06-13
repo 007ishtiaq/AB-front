@@ -4,6 +4,7 @@ import "./SideDrawer.css";
 import { Link } from "react-router-dom";
 import Backdrop from "../Backdrop/Backdrop";
 import { CloseOutlined } from "@ant-design/icons";
+import { ReactComponent as Logotextblack } from "../../images/headersvgs/logotextblack.svg";
 import { ReactComponent as Logosvg } from "../../images/headersvgs/pearllogo.svg";
 import { ReactComponent as Pearlytouchtxt } from "../../images/headersvgs/pearlytouch.svg";
 import { ReactComponent as Tickchecksvg } from "../../images/manageacUser/tickcheck.svg";
@@ -22,11 +23,8 @@ export default function SideDrawer(props) {
           <div className="SideDrawerHeader">
             <div className="sidedrawertop">
               <div class="logodiv">
-                <div class="logo-svgsize">
-                  <Logosvg />
-                </div>
                 <div class="logo-txtsize">
-                  <Pearlytouchtxt />
+                  <Logotextblack />
                 </div>
               </div>
               <CloseOutlined onClick={props.close} className="clear" />
