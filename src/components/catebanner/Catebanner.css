@@ -26,7 +26,11 @@
   width: 70%;
 }
 .ccatecont {
-  padding: 3rem 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0;
 }
 .catenameabove {
   margin-bottom: 2rem;
@@ -63,4 +67,71 @@
 }
 .catenamecont:hover .catebannersvg {
   fill: white;
+}
+
+/*****************************************
+***********Responsiveness**************
+*************************************** */
+
+@media (max-width: 935px) {
+  .cbannercont img {
+    width: 52%;
+  }
+}
+@media (max-width: 910px) {
+  .cbannercont {
+    width: 40%;
+  }
+  .cbannercont img {
+    width: 70%;
+  }
+  .ccatecont {
+    flex-grow: 1;
+  }
+}
+@media (max-width: 750px) {
+  .cbannercont {
+    width: 35%;
+  }
+  .cbannercont img {
+    width: 85%;
+  }
+}
+@media (max-width: 700px) {
+  .catebannercont {
+    flex-direction: column;
+    gap: 0;
+  }
+  .ccatecont {
+    width: 100%;
+    padding: 1rem 0;
+  }
+}
+@media (max-width: 550px) {
+  .catenameabove p {
+    font-size: 3rem;
+  }
+  .catenameabove {
+    margin-bottom: 0.5rem;
+  }
+  .catenamecont {
+    padding: 0.3rem 0.7rem;
+  }
+}
+@media (max-width: 430px) {
+  .catenameabove p {
+    font-size: 2.5rem;
+  }
+  .catenameabove span {
+    display: block;
+  }
+  .ccatecont {
+    padding: 1rem 1rem;
+  }
+  .catenameabove {
+    padding: 0 2rem;
+  }
+  .catenamecont {
+    font-size: 1.4rem;
+  }
 }

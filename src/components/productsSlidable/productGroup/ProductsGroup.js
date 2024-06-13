@@ -4,7 +4,6 @@ import ProductsSlider from "../productSlider/ProductsSlider";
 // import Countdown from "../../countdown/Countdown";
 import ProductCountdowns from "../../countdown/ProductCountdowns";
 import { getcurrentFlash } from "../../../functions/product";
-import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import ProductCardSkull from "../../Skeletons/ProductCardSkull";
 
