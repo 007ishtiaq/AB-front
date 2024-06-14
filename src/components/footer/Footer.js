@@ -211,7 +211,7 @@ export default function Footer() {
             </div>
 
             <div class="footer-colum">
-              <div class="col-heading">PearlyTouch</div>
+              <div class="col-heading">AppliaceBazar</div>
               <div class="col-ul">
                 <ul>
                   <li>

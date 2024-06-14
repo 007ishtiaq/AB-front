@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import "./Login.css";
 import Spinner from "../../components/Spinner/Spinner";
 import Smallspinner from "../../components/Spinner/Smallspinner";
-import { ReactComponent as Logosvg } from "../../images/headersvgs/pearllogo.svg";
+import { ReactComponent as Logosvg } from "../../images/headersvgs/logosign.svg";
 import { ReactComponent as Logotextblack } from "../../images/headersvgs/logotextblack.svg";
 import { useFormik } from "formik";
 import { registerSchema } from "../../schemas";
@@ -81,21 +81,23 @@ const ForgotPassword = ({ history }) => {
     <div class="loginmain">
       <div class="logincont">
         <div class="loginheadside">
-          {loading ? (
-            <div className="spinnerwraper">
-              <div className="bigspinner">
-                <Spinner />
+          <div className="topsign">
+            {loading ? (
+              <div className="spinnerwraper">
+                <div className="bigspinner">
+                  <Spinner />
+                </div>
+                <div className="smallspinner loginside">
+                  <Smallspinner />
+                </div>
               </div>
-              <div className="smallspinner loginside">
-                <Smallspinner />
+            ) : (
+              <div class="loginlogo">
+                <Logosvg />
               </div>
-            </div>
-          ) : (
-            <div class="loginlogo">
-              <Logosvg />
-            </div>
-          )}
-          <div class="welcometxt">Welcome to Pearly</div>
+            )}
+          </div>
+          <div class="welcometxt">Welcome to Appliance Bazar</div>
           <div class="guidetxt">Type your Email to Recover Password</div>
 
           <form onSubmit={handleSubmit} className="submitionform">

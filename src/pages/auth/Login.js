@@ -7,7 +7,7 @@ import { createOrUpdateUser } from "../../functions/auth";
 import Spinner from "../../components/Spinner/Spinner";
 import Smallspinner from "../../components/Spinner/Smallspinner";
 import { ReactComponent as Logotextblack } from "../../images/headersvgs/logotextblack.svg";
-import { ReactComponent as Logosvg } from "../../images/headersvgs/pearllogo.svg";
+import { ReactComponent as Logosvg } from "../../images/headersvgs/logosign.svg";
 import { ReactComponent as Googlesvg } from "../../images/login/google.svg";
 import { ReactComponent as Facebooksvg } from "../../images/login/facebook.svg";
 import "./Login.css";
@@ -283,21 +283,23 @@ const Login = ({ history }) => {
         <div class="loginmain">
           <div class="logincont">
             <div class="loginheadside">
-              {loading ? (
-                <div className="spinnerwraper">
-                  <div className="bigspinner">
-                    <Spinner />
+              <div className="topsign">
+                {loading ? (
+                  <div className="spinnerwraper">
+                    <div className="bigspinner">
+                      <Spinner />
+                    </div>
+                    <div className="smallspinner loginside">
+                      <Smallspinner />
+                    </div>
                   </div>
-                  <div className="smallspinner loginside">
-                    <Smallspinner />
+                ) : (
+                  <div class="loginlogo">
+                    <Logosvg />
                   </div>
-                </div>
-              ) : (
-                <div class="loginlogo">
-                  <Logosvg />
-                </div>
-              )}
-              <div class="welcometxt">Welcome to Pearly</div>
+                )}
+              </div>
+              <div class="welcometxt">Welcome to Appliance Bazar</div>
               <div class="guidetxt">Type your Email & Password to Login</div>
               <form onSubmit={handleSubmit} className="submitionform">
                 <div class="logininputcont">
