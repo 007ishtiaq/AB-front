@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Catebanner.css";
-import sampleImg from "../../images/catebanner/sample600x479.webp";
+import { getRelatedBanners } from "../../functions/banner";
 import { ReactComponent as Dishwashersvg } from "../../images/homepage/catebanner/dishwasher.svg";
 import { ReactComponent as Kettlesvg } from "../../images/homepage/catebanner/kettle.svg";
 import { ReactComponent as Fryersvg } from "../../images/homepage/catebanner/fryer.svg";
@@ -10,6 +10,23 @@ import { ReactComponent as Cookingrangesvg } from "../../images/homepage/cateban
 import { ReactComponent as Blandersvg } from "../../images/homepage/catebanner/blander.svg";
 
 export default function Catebanner() {
+  const [banners, setBanners] = useState([]);
+
+  useEffect(() => {
+    loadBannerData();
+  }, []);
+
+  const loadBannerData = () => {
+    getRelatedBanners("HomeCateBanner")
+      .then((res) => {
+        setBanners(res.data);
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
   return (
     <div class="cardcontainer">
       <div class="insidecont">
@@ -17,7 +34,7 @@ export default function Catebanner() {
           <div class="productsarea">
             <div className="catebannercont">
               <div className="cbannercont">
-                <img src={sampleImg} alt="" />
+                {banners.length && <img src={banners[0].image.url} alt="" />}
               </div>
               <div className="ccatecont">
                 <div className="catenameabove">

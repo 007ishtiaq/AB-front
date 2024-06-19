@@ -71,6 +71,9 @@
   font-size: 1.4rem;
   padding-left: 10px;
 }
+.logininputcont input::placeholder {
+  font-size: 1.2rem;
+}
 .forgotlink {
   text-align: right;
   margin-top: 0.3rem;

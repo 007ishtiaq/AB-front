@@ -21,9 +21,10 @@
 .cbannercont {
   display: flex;
   justify-content: center;
+  padding: 2rem;
 }
 .cbannercont img {
-  width: 70%;
+  width: 65%;
 }
 .ccatecont {
   display: flex;
@@ -53,6 +54,7 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
+  font-size: 1.4rem;
   padding: 0.5rem 1rem;
   border: 1px solid gray;
   border-radius: 0.4rem;
@@ -76,6 +78,9 @@
 @media (max-width: 935px) {
   .cbannercont img {
     width: 52%;
+  }
+  .cbannercont {
+    padding: 0;
   }
 }
 @media (max-width: 910px) {

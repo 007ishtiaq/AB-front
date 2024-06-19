@@ -199,32 +199,32 @@ const Register = ({ history }) => {
     initialValues: initialValues,
     validationSchema: registerSchema,
     onSubmit: async (values, action) => {
-      if (navigator.onLine) {
-        setLoading(true);
-        try {
-          const config = {
-            url: process.env.REACT_APP_REGISTER_REDIRECT_URL,
-            handleCodeInApp: true,
-          };
-          await auth.sendSignInLinkToEmail(values.email, config);
+      // if (navigator.onLine) {
+      setLoading(true);
+      try {
+        const config = {
+          url: process.env.REACT_APP_REGISTER_REDIRECT_URL,
+          handleCodeInApp: true,
+        };
+        await auth.sendSignInLinkToEmail(values.email, config);
 
-          toast.success(
-            `Email is sent to "${values.email}". Click the link to complete your registration.`
-          );
-          // save user email in local storage
-          window.localStorage.setItem("emailForRegistration", values.email);
-          // clear state
-          action.resetForm();
-          setLoading(false);
-        } catch (error) {
-          // console.error("Error sending sign-in link:", error);
-          setLoading(false);
-          toast.error("No Internet Connection");
-          setNoNetModal(true);
-        }
-      } else {
+        toast.success(
+          `Email is sent to "${values.email}". Click the link to complete your registration.`
+        );
+        // save user email in local storage
+        window.localStorage.setItem("emailForRegistration", values.email);
+        // clear state
+        action.resetForm();
+        setLoading(false);
+      } catch (error) {
+        // console.error("Error sending sign-in link:", error);
+        setLoading(false);
+        toast.error("No Internet Connection");
         setNoNetModal(true);
       }
+      // } else {
+      //   setNoNetModal(true);
+      // }
     },
   });
 

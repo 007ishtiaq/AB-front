@@ -189,8 +189,8 @@ const Login = ({ history }) => {
   // ---------formik usage--------
 
   const initialValues = {
-    email: "",
-    password: "",
+    email: "ishtiaqahmad427427@gmail.com",
+    password: "123456",
   };
 
   const {
